@@ -89,7 +89,7 @@ def screenshot_all_page(login_page_url, directory_name):
 
         this_p = 1
         while current_page != totalPages:
-            sys.stdout.write(f"\rNumber of screenshots taken: {i}")
+            sys.stdout.write(f"\rNumber of screenshots taken: {this_p}")
             sys.stdout.flush()
             time.sleep(1)
             canvas = driver.find_element(By.CSS_SELECTOR, "#canvas0")
