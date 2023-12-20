@@ -7,19 +7,35 @@ from PIL import Image
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-def resize_and_convert_png_to_jpg(image_path, max_size=(1280, 720), quality=85):
+from PIL import Image, ImageEnhance
+import io
+
+from PIL import Image, ImageEnhance
+import io
+
+def resize_and_convert_png_to_jpg(image_path, max_size=(1280, 720), quality=85, contrast_factor=50, brightness_factor=0.01):
     """
-        Resize and convert a PNG image to JPEG.
-        Args:
-            image_path (str): Path to the PNG image.
-            max_size (tuple): Maximum size of the image (width, height).
-            quality (int): Quality of the output JPEG image.
-        Returns:
-            PIL.Image: Resized and converted JPEG image.
-        """
+    Resize and convert a PNG image to JPEG, enhancing the contrast and brightness of the text.
+    Args:
+        image_path (str): Path to the PNG image.
+        max_size (tuple): Maximum size of the image (width, height).
+        quality (int): Quality of the output JPEG image.
+        contrast_factor (float): Factor by which to increase the contrast.
+        brightness_factor (float): Factor by which to adjust the brightness.
+    Returns:
+        PIL.Image: Resized and converted JPEG image.
+    """
     with Image.open(image_path) as img:
         # Resize the image, maintaining aspect ratio
-        img.thumbnail(max_size, Image.Resampling.LANCZOS)  # Updated resampling filter
+        img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+        # Enhance the contrast
+        contrast = ImageEnhance.Contrast(img)
+        img = contrast.enhance(contrast_factor)
+
+        # Enhance the brightness
+        brightness = ImageEnhance.Brightness(img)
+        img = brightness.enhance(brightness_factor)
 
         # If the image has an alpha channel, blend it onto a white background
         if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
@@ -35,6 +51,7 @@ def resize_and_convert_png_to_jpg(image_path, max_size=(1280, 720), quality=85):
 
         # Open the JPEG image from bytes and return
         return Image.open(jpeg_img_bytes)
+
 def pngs_to_pdf(source_folder, output_pdf, max_image_size, jpeg_quality):
     """
        Convert PNG images in a folder to a single PDF.
@@ -46,7 +63,7 @@ def pngs_to_pdf(source_folder, output_pdf, max_image_size, jpeg_quality):
        """
     imagelist = []
 
-    for i in range(1, 20):
+    for i in range(1, 7):
         file_path = os.path.join(source_folder, f"{i}.png")
         sys.stdout.write(f"\rNumber of Pages processed: {i}")
         sys.stdout.flush()
@@ -79,7 +96,7 @@ def screenshot_all_page(login_page_url, directory_name):
     # Navigate to the login page
     driver.get(login_page_url)
     print("Waiting for 60 seconds...")
-    time.sleep(20)
+    time.sleep(45)
 
     try:
         current_page = int(driver.find_element(By.XPATH, '//*[@id="pageNo"]').text)
@@ -132,7 +149,7 @@ def main():
         source_folder = input("Enter the source folder path: ")
         output_pdf = input("Enter the output PDF file name (e.g. output.pdf): ")
         max_image_size = (1280, 720)  # Adjust as needed
-        jpeg_quality = 85  # Adjust as needed
+        jpeg_quality = 85  # Adjust as neededل
 
         pngs_to_pdf(source_folder, output_pdf, max_image_size, jpeg_quality)
 
