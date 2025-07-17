@@ -63,7 +63,7 @@ def pngs_to_pdf(source_folder, output_pdf, max_image_size, jpeg_quality):
        """
     imagelist = []
 
-    for i in range(1, 2128):
+    for i in range(1, 1102):
         file_path = os.path.join(source_folder, f"{i}.png")
         sys.stdout.write(f"\rNumber of Pages processed: {i}")
         sys.stdout.flush()
