@@ -63,7 +63,8 @@ def pngs_to_pdf(source_folder, output_pdf, max_image_size, jpeg_quality):
        """
     imagelist = []
 
-    for i in range(1, 1102):
+    num_pages = len([f for f in os.listdir(source_folder) if f.endswith(".png")])
+    for i in range(1, num_pages + 1):
         file_path = os.path.join(source_folder, f"{i}.png")
         sys.stdout.write(f"\rNumber of Pages processed: {i}")
         sys.stdout.flush()
@@ -72,7 +73,9 @@ def pngs_to_pdf(source_folder, output_pdf, max_image_size, jpeg_quality):
             imagelist.append(img)
 
     if imagelist:
+        os.makedirs(os.path.dirname(output_pdf), exist_ok=True)
         imagelist[0].save(output_pdf, save_all=True, append_images=imagelist[1:])
+
 
         # Close all images after saving to PDF
         for img in imagelist:
@@ -142,12 +145,16 @@ def main():
     if choice == '1':
         # URL of the login page
         login_page_url = "https://taaghche.com/"
-        directory_name = input("Enter the Directory name for saving the screen shots: ")
+        subfolder = input("Enter a name for this run (e.g., session1): ")
+        directory_name = os.path.join("output", "screenshots", subfolder)
         screenshot_all_page(login_page_url, directory_name)
 
     elif choice == '2':
-        source_folder = input("Enter the source folder path: ")
-        output_pdf = input("Enter the output PDF file name (e.g. output.pdf): ")
+        subfolder = input("Enter the screenshot subfolder name (e.g. session1): ")
+        source_folder = os.path.join("output", "screenshots", subfolder)
+
+        pdf_name = input("Enter the PDF name (e.g. session1.pdf): ")
+        output_pdf = os.path.join("output", "pdfs", pdf_name)
         max_image_size = (1280, 720)  # Adjust as needed
         jpeg_quality = 85  # Adjust as neededل
 
