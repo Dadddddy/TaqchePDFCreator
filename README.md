@@ -1,3 +1,24 @@
+
+---
+
+## 🔐 Disclaimer
+
+This project is intended **only for personal use** by individuals who have **legitimately purchased** their books from [taaghche.com](https://taaghche.com).
+
+It allows you to read your owned content in an offline environment or on devices like Kindle, for personal convenience.
+
+**Do not** use this tool to:
+- Share, distribute, or publish copyrighted content
+- Bypass paywalls for unauthorized access
+- Violate Taaghche’s terms of service or copyright policies
+
+📛 **Using this script to generate and distribute PDFs of books you don’t own is illegal.**
+
+The author takes no responsibility for any misuse of this code. By using this project, you agree to use it lawfully and ethically.
+
+---
+
+
 # 📚 Taghche PDF Creator
 
 This project automates the process of:
