@@ -86,7 +86,7 @@ source venv/bin/activate
 After activating the environment:
 
 ```bash
-python3 main.py
+python3 taqche_to_pdf.py
 ```
 
 Then choose an option:
