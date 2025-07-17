@@ -63,7 +63,7 @@ def pngs_to_pdf(source_folder, output_pdf, max_image_size, jpeg_quality):
        """
     imagelist = []
 
-    for i in range(1, 7):
+    for i in range(1, 2128):
         file_path = os.path.join(source_folder, f"{i}.png")
         sys.stdout.write(f"\rNumber of Pages processed: {i}")
         sys.stdout.flush()
@@ -91,11 +91,11 @@ def screenshot_all_page(login_page_url, directory_name):
     if not os.path.exists(directory_name):
         os.makedirs(directory_name)
     driver = webdriver.Firefox()
-    driver.set_window_size(791, 671)
+    driver.set_window_size(400, 700)
 
     # Navigate to the login page
     driver.get(login_page_url)
-    print("Waiting for 60 seconds...")
+    print("Waiting for 45 seconds...")
     time.sleep(45)
 
     try:
@@ -141,7 +141,7 @@ def main():
 
     if choice == '1':
         # URL of the login page
-        login_page_url = input("Enter the URL of the login page: ")
+        login_page_url = "https://taaghche.com/"
         directory_name = input("Enter the Directory name for saving the screen shots: ")
         screenshot_all_page(login_page_url, directory_name)
 
