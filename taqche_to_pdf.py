@@ -145,15 +145,15 @@ def main():
     if choice == '1':
         # URL of the login page
         login_page_url = "https://taaghche.com/"
-        subfolder = input("Enter a name for this run (e.g., session1): ")
+        subfolder = input("Enter a directory name for this book (e.g., Sapiens): ")
         directory_name = os.path.join("output", "screenshots", subfolder)
         screenshot_all_page(login_page_url, directory_name)
 
     elif choice == '2':
-        subfolder = input("Enter the screenshot subfolder name (e.g. session1): ")
+        subfolder = input("Enter the screenshot subfolder name (e.g. Sapiens): ")
         source_folder = os.path.join("output", "screenshots", subfolder)
 
-        pdf_name = input("Enter the PDF name (e.g. session1.pdf): ")
+        pdf_name = input("Enter the PDF name (e.g. Sapiens.pdf): ")
         output_pdf = os.path.join("output", "pdfs", pdf_name)
         max_image_size = (1280, 720)  # Adjust as needed
         jpeg_quality = 85  # Adjust as neededل
